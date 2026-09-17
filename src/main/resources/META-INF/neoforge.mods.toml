@@ -7,7 +7,6 @@ modId="playersuite"
 version="1.0.0"
 displayName="玩家服务套件 (Player Suite)"
 authors="KujouShiori"
-# 发布前请把上面的作者改成你自己的名字 / GitHub 用户名
 description='''
 一个 jar 内集齐七项玩家功能，全部由一条指令 /ps 打开总入口，界面内点击进入子页面：
 - 个人仓库：服务端持久化的私人空间，花金币扩充容量，支持整理与分页
