@@ -1,0 +1,58 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version "${moddevgradle_version}"
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = "${mod_id}-${minecraft_version}"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(java_version as int)
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'NeoForged Releases'
+        url = 'https://maven.neoforged.net/releases'
+    }
+}
+
+neoForge {
+    // NeoForge 版本（Minecraft 1.21.1 -> 21.1.x）
+    version = neo_version
+
+    runs {
+        // 开发用客户端：./gradlew runClient
+        // 调试用自动进服：./gradlew runClient -PquickJoin=localhost:25565
+        // （配合另一个终端里的 ./gradlew runServer，可以直接验证各个功能界面能否打开）
+        client {
+            client()
+            gameDirectory = file('run/client')
+            if (project.hasProperty('quickJoin')) {
+                programArguments.addAll('--quickPlayMultiplayer', project.property('quickJoin').toString())
+            }
+        }
+        // 开发用专用服务端：./gradlew runServer
+        server {
+            server()
+            gameDirectory = file('run/server')
+        }
+    }
+
+    mods {
+        // 让 runClient / runServer 直接加载本工程的源码产物
+        playersuite {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = java_version as int
+}

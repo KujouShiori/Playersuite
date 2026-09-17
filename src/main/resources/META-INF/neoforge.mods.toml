@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[3,)"
+license="MIT"
+
+[[mods]]
+modId="playersuite"
+version="1.0.0"
+displayName="玩家服务套件 (Player Suite)"
+authors="KujouShiori"
+# 发布前请把上面的作者改成你自己的名字 / GitHub 用户名
+description='''
+一个 jar 内集齐七项玩家功能，全部由一条指令 /ps 打开总入口，界面内点击进入子页面：
+- 个人仓库：服务端持久化的私人空间，花金币扩充容量，支持整理与分页
+- 邮件：玩家私信 + 附件领取 + 全服公告
+- 银行：存取款、每日利息、手续费与收支流水
+- 玩家商店：玩家自助上架，成交扣税，离线收入待领取
+- 官方市场：服务端定价目录，双向买卖、库存与定时补货（设计参考 TradeSquares）
+- 玩家称号：金币购买称号，自动注入聊天前缀
+- 每日签到：周期奖励、连续签到加成与补签
+
+内置经济系统（可一行代码对接外部经济），全部设置集中在 config/playersuite-common.toml。
+'''
+
+[[dependencies.playersuite]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.playersuite]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1,1.22)"
+ordering="NONE"
+side="BOTH"
