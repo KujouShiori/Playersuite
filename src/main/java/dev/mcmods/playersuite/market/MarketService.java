@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -241,7 +241,7 @@ public final class MarketService {
         remembered.adminMode = adminMode;
         remembered.page = clamped;
 
-        viewer.openMenu(new SimpleMenuProvider(
+        viewer.openMenu(new SuiteMenuProvider(
                         (containerId, inventory, sender) -> new MarketMenu(containerId, inventory, viewer, data),
                         Component.translatable("playersuite.market.title")),
                 buf -> MarketMenu.writeTo(buf, data));

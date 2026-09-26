@@ -11,7 +11,7 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
 import net.minecraft.world.entity.player.Player;
 
 /**
@@ -66,7 +66,7 @@ public final class WarehouseService {
         int clamped = clampPage(page, rows);
         boolean manage = canManage(viewer, owner);
 
-        MenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, player) -> new WarehouseMenu(containerId, inventory, viewer, owner, data, clamped),
                 title(owner));
 

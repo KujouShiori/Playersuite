@@ -1,5 +1,6 @@
 package dev.mcmods.playersuite.client.hub;
 
+import dev.mcmods.playersuite.client.ui.CursorKeeper;
 import dev.mcmods.playersuite.client.ui.Theme;
 import dev.mcmods.playersuite.economy.Economy;
 import dev.mcmods.playersuite.hub.HubMenu;
@@ -47,6 +48,15 @@ public class HubScreen extends AbstractContainerScreen<HubMenu> {
         addRenderableWidget(Button.builder(Component.translatable("playersuite.hub.claim"),
                         b -> sendButton(HubMenu.BTN_CLAIM))
                 .bounds(left + 8, top + HubMenu.CLAIM_TOP, 160, 20).build());
+        CursorKeeper.armRestore();
+    }
+
+    @Override
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        // 从总入口点迚功能页会重开容器，原版会把光标弹到屏幕正中，这里恢复
+        CursorKeeper.restoreIfPending(this.minecraft);
+        CursorKeeper.remember(this.minecraft, mouseX, mouseY);
+        super.render(graphics, mouseX, mouseY, partialTick);
     }
 
     private void sendButton(int id) {

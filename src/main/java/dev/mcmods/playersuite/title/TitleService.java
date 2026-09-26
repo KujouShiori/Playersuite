@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
@@ -132,7 +132,7 @@ public final class TitleService {
         long balance = Economy.balance(viewer);
         final ServerPlayer shown = target;
 
-        MenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, sender) -> new TitleMenu(containerId, inventory, viewer, shown, data,
                         clamped, pages, flags, owned, total, maxOwned, pageEntries, bits),
                 pageTitle(shown, viewer, flags));
@@ -162,7 +162,7 @@ public final class TitleService {
         final ServerPlayer shown = target;
         final int selected = index;
 
-        MenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, sender) -> new TitleMenu(containerId, inventory, viewer, shown, data,
                         flags, owned, total, maxOwned, selected, gridPage, entry, bits),
                 pageTitle(shown, viewer, flags));

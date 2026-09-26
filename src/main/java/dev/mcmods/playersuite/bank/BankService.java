@@ -10,7 +10,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
@@ -220,7 +221,7 @@ public final class BankService {
         final int finalPage = clamped;
         final int historyTotal = historyShown;
         final boolean finalSelf = self;
-        SimpleMenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, player) -> new BankMenu(containerId, inventory, viewer, shown,
                         finalMode, finalPage, pages, manage, admin, finalSelf, historyTotal),
                 title(shown, viewer, finalMode));

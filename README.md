@@ -166,9 +166,6 @@ Economy.bind(new MyCurrency());
 
 ```bash
 ./gradlew build            # 产物：build/libs/playersuite-1.21.1-<版本>.jar
-./gradlew runServer        # 开发用专用服务端（游戏目录 run/server）
-./gradlew runClient -PquickJoin=localhost:25565   # 客户端自动进本地服（配合上面的服务端）
-python tools/check_all.py  # 静态自检：括号/package/未使用 import/translatable 占位符与中英文对齐
 ```
 
 依赖首次解析需要访问 Maven Central 与 `maven.neoforged.net`。国内或公司网络下载失败时：

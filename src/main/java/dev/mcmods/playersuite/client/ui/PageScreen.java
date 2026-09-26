@@ -3,6 +3,7 @@ package dev.mcmods.playersuite.client.ui;
 import dev.mcmods.playersuite.client.ClientNet;
 import dev.mcmods.playersuite.economy.Economy;
 import dev.mcmods.playersuite.menu.Layout;
+import dev.mcmods.playersuite.menu.Layout;
 import dev.mcmods.playersuite.ui.PageMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -68,6 +69,8 @@ public abstract class PageScreen<M extends PageMenu> extends AbstractContainerSc
         nextButton.active = menu.page() < menu.pages() - 1;
 
         addExtraButtons(left, top, row1, row2);
+        // 翻页/切页会重开容器，原版抓鼠标时会把光标弹到屏幕正中，这里标记账候恢复
+        CursorKeeper.armRestore();
     }
 
     /**
@@ -107,6 +110,9 @@ public abstract class PageScreen<M extends PageMenu> extends AbstractContainerSc
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        // 必须在 super.render 之前：此时原版的 grabMouse 已执行完，把光标放回切换前的位置
+        CursorKeeper.restoreIfPending(this.minecraft);
+        CursorKeeper.remember(this.minecraft, mouseX, mouseY);
         if (prevButton != null && menu.pages() > 1) {
             prevButton.active = menu.page() > 0;
             nextButton.active = menu.page() < menu.pages() - 1;

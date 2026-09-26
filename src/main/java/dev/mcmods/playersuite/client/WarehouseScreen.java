@@ -1,5 +1,6 @@
 package dev.mcmods.playersuite.client;
 
+import dev.mcmods.playersuite.client.ui.CursorKeeper;
 import dev.mcmods.playersuite.economy.Economy;
 import dev.mcmods.playersuite.menu.WarehouseLayout;
 import dev.mcmods.playersuite.menu.WarehouseMenu;
@@ -72,6 +73,7 @@ public class WarehouseScreen extends AbstractContainerScreen<WarehouseMenu> {
         nextButton.visible = menu.pages() > 1;
         prevButton.active = menu.page() > 0;
         nextButton.active = menu.page() < menu.pages() - 1;
+        CursorKeeper.armRestore();
     }
 
     private void sendButton(int id) {
@@ -91,6 +93,9 @@ public class WarehouseScreen extends AbstractContainerScreen<WarehouseMenu> {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        // 翻页会重开容器，先恢复光标再做后续刷新（必须在 super.render 之前）
+        CursorKeeper.restoreIfPending(this.minecraft);
+        CursorKeeper.remember(this.minecraft, mouseX, mouseY);
         // 让按钮上的价格/余额随容器数据实时刷新
         if (upgradeButton != null) {
             int price = menu.price();

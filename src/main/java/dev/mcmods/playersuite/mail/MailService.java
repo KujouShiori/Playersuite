@@ -13,7 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -115,7 +115,7 @@ public final class MailService {
         int unread = data.unreadCount();
         long balance = Economy.balance(viewer);
 
-        MenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, sender) -> new MailMenu(containerId, inventory, viewer, owner, data,
                         MailMenu.MODE_LIST, rows, clamped, pages, -1, 0, flags, total, 0, pageMails, null, unread),
                 listTitle(viewer, owner, self));
@@ -205,7 +205,7 @@ public final class MailService {
         long balance = Economy.balance(viewer);
         final int selected = index;
 
-        MenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, sender) -> new MailMenu(containerId, inventory, viewer, target, data,
                         MailMenu.MODE_DETAIL, MailMenu.DETAIL_GRID_ROWS, Mth.clamp(bodyPage, 0, pages - 1), pages,
                         selected, listPage, flags, total, attCount, null, mail, unread),
@@ -282,7 +282,7 @@ public final class MailService {
         ItemStackHandler handler = draft != null ? draft : new ItemStackHandler(Math.max(0, slots));
         int flags = broadcast ? MailMenu.FLAG_BROADCAST : 0;
         long cost = broadcast ? 0L : SuiteConfig.mailSendCost();
-        MenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, sender) -> new MailMenu(containerId, inventory, viewer, flags,
                         handler, to, title, body, Economy.intForGui(cost)),
                 Component.translatable(broadcast ? "playersuite.mail.broadcastTitle" : "playersuite.mail.compose"));
@@ -299,7 +299,7 @@ public final class MailService {
     private static void reopenCompose(ServerPlayer viewer, MailMenu old) {
         old.markHandoff();
         long cost = old.isBroadcast() ? 0L : composeCost(old);
-        MenuProvider provider = new SimpleMenuProvider(
+        MenuProvider provider = new SuiteMenuProvider(
                 (containerId, inventory, sender) -> MailMenu.newCompose(containerId, inventory, viewer, old,
                         Economy.intForGui(cost)),
                 Component.translatable(old.isBroadcast() ? "playersuite.mail.broadcastTitle" : "playersuite.mail.compose"));

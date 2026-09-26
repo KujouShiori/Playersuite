@@ -17,7 +17,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -444,7 +444,7 @@ public final class CheckinService {
         final ServerPlayer shown = target;
         final int finalPage = clamped;
         final int finalPages = pages;
-        viewer.openMenu(new SimpleMenuProvider(
+        viewer.openMenu(new SuiteMenuProvider(
                         (containerId, inventory, player) -> new CheckinMenu(containerId, inventory, viewer,
                                 shown, finalPage, finalPages, manage, flags),
                         title(shown, self)),

@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -133,7 +133,7 @@ public final class ShopService {
                 shopName);
         final ServerPlayer owner = target;
         final int fPage = clamped;
-        viewer.openMenu(new SimpleMenuProvider(
+        viewer.openMenu(new SuiteMenuProvider(
                         (containerId, inventory, sender) -> new ShopMenu(containerId, inventory,
                                 viewer, owner, fPage, pages, fManage, fAdmin, fSelf, rowSlots),
                         title),
@@ -153,7 +153,7 @@ public final class ShopService {
         int rows = Math.max(0, Math.min(pageSize, all.size() - from));
         long balance = Economy.balance(viewer);
         boolean manage = false;
-        viewer.openMenu(new SimpleMenuProvider(
+        viewer.openMenu(new SuiteMenuProvider(
                         (containerId, inventory, sender) -> new ShopBrowseMenu(containerId, inventory,
                                 viewer, all, from, rows, clamped, pages, pageSize),
                         Component.translatable("playersuite.shop.browse.title")),

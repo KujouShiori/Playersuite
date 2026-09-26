@@ -9,7 +9,7 @@ import dev.mcmods.playersuite.ui.PageMenu;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.SimpleMenuProvider;
+import dev.mcmods.playersuite.ui.SuiteMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 
 /**
@@ -60,7 +60,7 @@ public class HubMenu extends PageMenu {
         int mask = FeatureOpeners.enabledMask();
         boolean manage = player.hasPermissions(SuiteConfig.managePermission());
         long balance = Economy.balance(player);
-        player.openMenu(new SimpleMenuProvider(
+        player.openMenu(new SuiteMenuProvider(
                         (containerId, inventory, sender) -> new HubMenu(containerId, inventory, player, pending, mask, manage),
                         Component.translatable("playersuite.hub.title")),
                 buf -> writeFull(buf, balance, 0, 1, manage, unread, pending, mask));
