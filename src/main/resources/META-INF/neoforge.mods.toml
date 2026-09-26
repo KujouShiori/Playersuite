@@ -4,7 +4,7 @@ license="MIT"
 
 [[mods]]
 modId="playersuite"
-version="1.0.0"
+version="1.0.1"
 displayName="玩家服务套件 (Player Suite)"
 authors="KujouShiori"
 description='''
