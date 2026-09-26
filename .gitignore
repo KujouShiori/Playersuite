@@ -32,3 +32,6 @@ replay_pid*
 # 系统
 .DS_Store
 Thumbs.db
+
+# 防止 Windows Python 安装管理器误装到工程目录
+Python/
